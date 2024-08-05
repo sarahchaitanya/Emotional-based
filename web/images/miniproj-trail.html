@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>music-world</title>
+	<style type="text/css">
+		body{
+			font-family: cursive;
+			font-style: oblique;
+		}
+		header{
+			width: 100%;
+			height: 30%;
+			align-content: center;
+			/*border-bottom: 2px solid black;*/
+			/*font-size: xxx-large;*/
+			text-align: center;
+		}
+		nav{
+			border-right: 2px solid black;
+			border-top: 2px solid black;
+			border-top-right-radius: 10px;
+		}
+		nav li{
+			padding:15px;
+			border-bottom: 2px solid chocolate;
+			border-bottom-right-radius: 10px;
+		}
+		#happy,#sad{
+			padding: 10px;
+			display: inline-block;
+			width: 10%;
+			border:2px solid green;
+			border-radius: 4px;
+			float: left;
+			margin: 5px;
+
+		}
+		#happy:hover,#sad:hover{
+			cursor: pointer;
+			box-shadow: 2px,2px;
+		}
+		ul{
+			list-style-type: none;
+			list-style: none;
+		}
+		ul li{
+			border-bottom: 2px solid chocolate;
+			border-bottom-right-radius: 10px;
+			display: block;
+			padding:10px;
+		}
+		img{
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			object-fit: fill;
+		}
+		.gridcont{
+			display: grid;
+			grid-template-columns: 1fr 3fr;
+		}
+	</style>
+</head>
+<body>
+<div class="gridcont">
+	<div id="profile" class="griditems">
+		<h3>Hello Lady!!</h3>
+	</div>
+	<header class="griditems">
+		<h1>Music Arena</h1>
+		<div id="happy" onclick="happyclick()">HAPPY</div>
+	    <div id="sad" onclick="sadclick()">SAD</div>
+	</header>
+	<nav class="griditems">
+		<ul>
+			<li>
+				Recently played
+			</li>
+			<li>
+				Queued
+			</li>
+			<li>
+				Emotion mode
+			</li>
+			<li>
+				Random Mode
+			</li>
+		</ul>
+	</nav>
+	<div id="songslist" class="griditems">
+		<article class="mainhappy" style="display: block; position: absolute;">
+			<ul>
+				<li class="song1">
+					<div class="songinfo">
+						<img src="1.png" width="50px" height="50px">
+						abcd song
+						<img src="4.png">
+					</div>
+				</li>
+				<li class="song2">
+					<div class="songinfo">
+						<img src="2.jpg">
+						abcd song
+						<img src="3.png">
+					</div>
+				</li>
+				<li class="song3">
+					<div class="songinfo">
+						<img src="5.png">
+						abcd song
+						<img src="6.jpg">
+					</div>
+				</li>
+			</ul>
+		</article>
+		<article class="mainsad" style="visibility: hidden; position: absolute;">
+			<ul>
+				<li class="song1">
+					<div class="songinfo">
+						<img src="7.png">
+						abcd song
+						<img src="8.png">
+					</div>
+				</li>
+				<li class="song2">
+					<div class="songinfo">
+						<img src="9.png">
+						abcd song
+						<img src="10.jpg
+						">
+					</div>
+				</li>
+				<li class="song3">
+					<div class="songinfo">
+						<img src="1.png">
+						abcd song
+						<img src="2.jpg">
+					</div>
+				</li>
+			</ul>
+		</article>
+	</div>
+</div>
+<script type="text/javascript">
+	happyart=document.getElementsByClassName('mainhappy');
+	sadart=document.getElementsByClassName('mainsad');
+	function happyclick(){
+		sadart[0].style.visibility='hidden';
+		happyart[0].style.visibility='visible';
+	}
+	function sadclick(){
+		happyart[0].style.visibility="hidden";
+		sadart[0].style.visibility='visible';
+	}
+</script>
+</body>
+</html>

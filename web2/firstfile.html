@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script type="text/javascript" src="/eel.js"></script>
+        <style>
+        body{
+            background: conic-gradient(from 90deg,blue, orange, green, red,blue);
+        }
+        </style>
+    </head>
+    <body>
+        <a href="two.html">link to second page</a>
+        <p>Hello first page...</p>
+        <p id="out"></p>
+        <button onclick="getTime()">click me for calling py fun</button>
+    </body>
+    <script>
+        async function getTime() {
+            let value = await eel.getEmotion()();
+            document.getElementById('out').innerHTML=value;
+        }
+    </script>
+</html>

@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<title>musical Arena</title>
+	<script type="text/javascript" src="/eel.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="new-styles.css">
+	<link rel="stylesheet" type="text/css" href="player.css">
+	<link rel="stylesheet" type="text/css" href="all.css">
+	<!-- <title>music-world</title> -->
+	<style>
+	.dropdown {
+		position: relative;
+		display: block;
+		border-bottom: 2px solid whites;
+	  }
+	  
+	  .nav_items{
+		  padding: 10px;
+	  }
+
+	  .dropdown-content {
+		display: none;
+		position: absolute;
+		/* background-color:white; */
+		color:purple;
+		min-width: 160px;
+		border-radius: 5px;;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.7);
+		padding: 12px 16px;
+		z-index: 1;
+		
+	  }
+
+	  .dropdown-content p{
+		color:purple;
+		/* text-shadow: 2px 2px rgba(0,0,0,0.7); */
+	  }
+	  
+	  .dropdown:hover .dropdown-content {
+		display: block;
+		/* color:white; */
+		background-color: white;
+	  }
+	  i {
+		  display: block !important;
+		  text-align: center;
+		  font-size: 7em;
+	  }
+	  .angry1{
+		  display: inline-block !important;
+		  font-size: 1em !important;
+	  }
+	  .nav_items p{
+		  border-bottom: 2px solid white;
+		  margin:0;
+		  padding:10px;
+		  display: block;
+	  }
+	  .nav_items:hover{
+		cursor: pointer;
+	  }
+	  </style>
+</head>
+<body id="bodyy" onload="myfun()">
+
+	<!-- <div id="loading">  <img style="display: block; -->
+		<!-- <img id="loading" style="display: block;margin-left: auto;
+		margin-right: auto" src="preload1.PNG"> preloading image</div> -->
+
+<div class="gridcont">
+	<div id="profile" class="griditems">
+		<!-- <i class="fas fa-user"></i> -->
+		<i class="fas fa-7x fa-user-circle"></i>
+		<!-- <i class="fas fa-5x fa-user"></i> -->
+		<!-- <h3 style="margin-top: 0;">Hello Lady!!</h3> -->
+	
+	</div>
+	<div class="griditems headerclass">
+	  <header>
+		<h1>Music Arena</h1>
+		<ul id="header-emotions">
+		<li id="happy" onclick="happyclick()">HAPPY <i class="far fa-laugh-beam angry1"></i></li>
+	    <li id="sad" onclick="sadclick()">SAD <i class="far fa-sad-tear angry1"></i></li>
+		<li id="angry" onclick="angryclick()">ANGRY <i class="far fa-angry angry1"></i></li>
+		<li id="neutral" onclick="neutralclick()">NEUTRAL <i class="far fa-meh angry1"></i></li>
+	    </ul>
+	 </header>
+    </div>
+	<nav class="griditems">
+		<!-- <div>
+			<i class="fa-solid fa-bars angry1"></i>
+		</div> -->
+		<div class="nav_items dropdown">
+				<!-- <i class="fas fa-clock angry1"></i> -->
+				<p>Recent Plays</p>
+			<div class="dropdown-content" id="recentp">
+
+			</div>
+
+		</div>
+		<div  class="dropdown nav_items">
+  			<p>Queue</p>
+  			<div class="dropdown-content" id ="queue"></div>	
+		</div>
+
+		<div  class="dropdown nav_items">
+			<p>Genre</p>
+			<div class="dropdown-content">
+				<p>Melody</p>
+				<p>feel good</p>
+				<p>classics</p>
+				<p>rock</p>
+			</div>
+		</div>
+
+		<div  class="dropdown nav_items">
+			<p>Playlists</p>
+			<div class="dropdown-content">
+			</div>
+		</div>
+	</nav>
+	<div id="songslist" class="griditems">
+
+			<div id="happylist" class="lists" style="position:absolute;width:70%;height:60%;overflow:auto;visibility:visible"> <!--top most ele to undle list1-->
+			</div>
+
+			<div id='sadlist' class="lists" style="position:absolute;visibility: hidden; width:70%;height:60%; overflow:auto;">
+			</div>
+            
+			<div id='angrylist'class="lists" style="visibility: hidden;position:absolute; width:70%;height:60%; overflow:auto;">
+			</div>
+
+            <div id="neutrallist" class="lists" style="visibility: hidden;position:absolute; width:70%;height:60%; overflow:auto;" >
+			</div>		
+	</div>
+	<script src="code.js"></script>
+
+</div>
+<div id="third">
+	<div id="emoji"></div>
+	<div id="xyz">
+	&nbsp;&nbsp;&nbsp;Playing :&nbsp;&nbsp;
+	<label id="sname" align="center">none</label></div>
+	<div id="mod">mode : Queue-mode <input type="radio" name="mode" checked="checked" onclick="setmod(this)" value="1"> &nbsp;&nbsp;Emotion-mode <input type="radio" name="mode" onclick="setmod(this)" value="2"> &nbsp;&nbsp;Random-mode 
+		<input type="radio" name="mode" onclick="setmod(this)" value="3">
+	</div>
+	<audio controls id="main_slider">
+	  <source id="sel"  type="audio/mpeg">
+       Your browser does not support the audio element.
+	</audio>
+</div>
+
+
+<script type="text/javascript">
+	// var preloader= document.getElementById("loading");
+	// function myfun(){
+	// 	var timeout=setTimeout(t,500);
+	// }
+	// function t(){
+	// 	preloader.style.display='none';
+	// }
+	var angle=180;
+    var body=document.getElementById('bodyy');
+	var red = "rgba(255,0,0,0.6)";//red
+	var green = "rgba(0,255,0,0.6)";//green
+	var blue = "rgba(0,0,255,0.6)"; //blue
+	var yello="rgb(255,165,0)";
+	var orange="rgb(255,69,0)";
+	function displayTime() {
+		// body.style.background="linear-gradient("+angle+"deg,"+color1+","+color2+" 53%,"+color3+" 68%)";
+		body.style.background="conic-gradient(from "+angle+"deg,blue, orange, green, red,blue)";
+		// body.style.background="conic-gradient(from "+angle+"deg,"+blue+","+orange+","+ green+","+red+","+blue+")";
+		angle=(angle-10)%360;
+	}
+
+	
+	var createClock;
+
+	document.getElementById("main_slider").onplay=function(){
+		// clearInterval(createClock);
+		console.log('came to onplay');
+		createClock= setInterval(displayTime, 100);
+	}
+
+	document.getElementById("main_slider").onpause=function(){
+		clearInterval(createClock);
+		console.log("came to onpause");
+	}
+
+	document.getElementById("main_slider").onended=function(){
+		clearInterval(createClock);
+		if(mod==1)
+			next_in_Q();
+		else if(mod==2){
+			getTime();
+		}
+		else
+			rand_play();
+
+	};
+	
+	happyart=document.getElementById('happylist');
+	sadart=document.getElementById('sadlist');
+	angryart=document.getElementById('angrylist');
+	neutralart=document.getElementById('neutrallist');
+
+	happybt=document.getElementById('happy');
+	sadbt=document.getElementById('sad');
+	angrybt=document.getElementById('angry');
+	neutralbt=document.getElementById('neutral');
+	function happyclick(){
+		sadart.style.visibility='hidden';
+		angryart.style.visibility='hidden';
+		neutralart.style.visibility='hidden';
+		happyart.style.visibility='visible';
+		happybt.style.backgroundColor='white';
+		happybt.style.color='purple';
+		sadbt.style.backgroundColor=null;
+		angrybt.style.backgroundColor=null;
+		neutralbt.style.backgroundColor=null;
+		sadbt.style.color='white';
+		angrybt.style.color='white';
+		neutralbt.style.color='white';
+	}
+	function sadclick(){
+		happyart.style.visibility="hidden";
+		angryart.style.visibility='hidden';
+		neutralart.style.visibility='hidden';
+		sadart.style.visibility='visible';
+		happybt.style.backgroundColor=null;
+		// happybt.style.boxShadow="3px 2px 5px white";
+		sadbt.style.backgroundColor="white";
+		sadbt.style.color='purple';
+		angrybt.style.backgroundColor=null;
+		neutralbt.style.backgroundColor=null;
+		angrybt.style.color='white';
+		neutralbt.style.color='white';
+		happybt.style.color='white';
+	}
+	function angryclick(){
+		happyart.style.visibility="hidden";
+		sadart.style.visibility='hidden';
+		neutralart.style.visibility='hidden';
+		angryart.style.visibility='visible';
+		angrybt.style.backgroundColor='white';
+		angrybt.style.color='purple';
+		sadbt.style.backgroundColor=null;
+		happybt.style.backgroundColor=null;
+		neutralbt.style.backgroundColor=null;
+		sadbt.style.color='white';
+		happybt.style.color='white';
+		neutralbt.style.color='white';
+	}
+	function neutralclick(){
+		happyart.style.visibility="hidden";
+		angryart.style.visibility='hidden';
+		sadart.style.visibility='hidden';
+		neutralart.style.visibility='visible';
+		neutralbt.style.backgroundColor='white';
+		neutralbt.style.color='purple';
+		sadbt.style.backgroundColor=null;
+		sadbt.style.color='white';
+		angrybt.style.backgroundColor=null;
+		angrybt.style.color='white';
+		happybt.style.backgroundColor=null;
+		happybt.style.color='white';
+	}
+
+</script>
+</body>
+</html>
